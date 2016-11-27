@@ -38,19 +38,20 @@ Add `chai-friendly` to the plugins section of your `.eslintrc` configuration fil
 ```
 
 
-Then configure the rules you want to use under the rules section.
+Then disable original `no-unused-expressions` rule and configure chai-friendly replacement under the rules section.
 
 ```json
 {
     "rules": {
-        "no-unused-expressions": 2
+        "no-unused-expressions": 0,
+        "chai-friendly/no-unused-expressions": 2
     }
 }
 ```
 
 ## Supported Rules
 
-* no-unused-expressions
+* chai-friendly/no-unused-expressions
 
 
 
