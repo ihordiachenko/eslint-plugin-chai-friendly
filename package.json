@@ -1,0 +1,26 @@
+{
+  "name": "eslint-plugin-chai-friendly",
+  "version": "0.0.0",
+  "description": "This plugin makes 'no-unused-expressions' rule friendly towards chai expect statements.",
+  "keywords": [
+    "eslint",
+    "eslintplugin",
+    "eslint-plugin"
+  ],
+  "author": "Ihor Diachenko",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "mocha tests --recursive"
+  },
+  "dependencies": {
+    "requireindex": "~1.1.0"
+  },
+  "devDependencies": {
+    "eslint": "~2.6.0",
+    "mocha": "^2.4.5"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "license": "ISC"
+}
