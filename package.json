@@ -5,8 +5,18 @@
   "keywords": [
     "eslint",
     "eslintplugin",
-    "eslint-plugin"
+    "eslint-plugin",
+    "chai",
+    "lint"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ihordiachenko/eslint-plugin-chai-friendly.git"
+  },
+  "homepage": "https: //github.com/ihordiachenko/eslint-plugin-chai-friendly#readme",
+  "bugs": {
+    "url": "https://github.com/ihordiachenko/eslint-plugin-chai-friendly/issues"
+  },
   "author": "Ihor Diachenko",
   "main": "lib/index.js",
   "scripts": {
