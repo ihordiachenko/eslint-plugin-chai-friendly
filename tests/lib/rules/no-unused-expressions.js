@@ -70,7 +70,8 @@ ruleTester.run("no-unused-expressions", rule, {
             code: "shouldNotBeAffectedByAllowTemplateTagsOption()",
             options: [{ allowTaggedTemplates: true }],
             parserOptions: { ecmaVersion: 6 }
-        }
+        },
+        "expect(foo).to.be.true;"
     ],
     invalid: [
         { code: "0", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
