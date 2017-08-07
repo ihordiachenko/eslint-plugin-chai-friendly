@@ -71,7 +71,12 @@ ruleTester.run("no-unused-expressions", rule, {
             options: [{ allowTaggedTemplates: true }],
             parserOptions: { ecmaVersion: 6 }
         },
-        "expect(foo).to.be.true;"
+        // Chai statements
+        "expect(foo).to.be.true;",
+        "expect(foo).to.have.a.property('bar').which.is.true",
+        "foo.should.be.true;",
+        "foo.inner.nested.should.be.true",
+        "foo.should.have.a.property('bar').which.is.true;"
     ],
     invalid: [
         { code: "0", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
@@ -125,5 +130,8 @@ ruleTester.run("no-unused-expressions", rule, {
             parserOptions: { ecmaVersion: 6 },
             errors: ["Expected an assignment or function call and instead saw an expression."]
         },
+        // Chai statements
+        { code: "foo.expect('bar').not.to.pass;", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }]},
+        { code: "should.not.pass;", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }] },
     ]
 });

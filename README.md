@@ -1,13 +1,15 @@
 # eslint-plugin-chai-friendly
 
-This plugin overrides `no-unused-expressions` to make it friendly towards chai expect statements.
+This plugin overrides `no-unused-expressions` to make it friendly towards chai `expect` and `should` statements.
 
 ```javascript
 // this
 expect(foo).to.be.true;
+foo.should.be.true;
 
 // instead of this
 expect(foo).to.be.true; // eslint-disable-line no-unused-expressions
+foo.should.be.true; // eslint-disable-line no-unused-expressions
 ```
 
 ## Installation
