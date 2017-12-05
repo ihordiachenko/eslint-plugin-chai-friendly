@@ -1,5 +1,7 @@
 # eslint-plugin-chai-friendly
 
+[![npm](https://img.shields.io/npm/v/eslint-plugin-chai-friendly.svg)](https://www.npmjs.com/package/eslint-plugin-chai-friendly) [![npm](https://img.shields.io/npm/dm/eslint-plugin-chai-friendly.svg)](https://www.npmjs.com/package/eslint-plugin-chai-friendly)
+
 This plugin overrides `no-unused-expressions` to make it friendly towards chai `expect` and `should` statements.
 
 ```javascript
@@ -67,8 +69,3 @@ More info in the original rule's [docs](http://eslint.org/docs/rules/no-unused-e
 ## Supported Rules
 
 - chai-friendly/no-unused-expressions
-
-
-
-
-
