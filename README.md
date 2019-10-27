@@ -32,7 +32,7 @@ npm install eslint-plugin-chai-friendly --save-dev
 
 ## Usage
 
-Add `chai-friendly` to the plugins section of your `.eslintrc` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `chai-friendly` to the plugins section of your `.eslintrc.*` configuration file. You can omit the `eslint-plugin-` prefix:
 
 ```json
 {
@@ -54,6 +54,16 @@ Then disable original `no-unused-expressions` rule and configure chai-friendly r
 }
 ```
 
+If you don't need to tweak the above rule settings, you can instead
+just add the following to your config file's `extends` and the above
+will be applied automatically:
+
+```json
+{
+  "extends": ["plugin:chai-friendly/recommended"]
+}
+```
+
 ## Options
 
 This rule, in its default state, does not require any arguments. If you would like to enable one or more of the following you may pass an object with the options set as follows:
@@ -68,4 +78,4 @@ More info in the original rule's [docs](http://eslint.org/docs/rules/no-unused-e
 
 ## Supported Rules
 
-- chai-friendly/no-unused-expressions
+- `chai-friendly/no-unused-expressions`
