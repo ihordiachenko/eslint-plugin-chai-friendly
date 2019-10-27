@@ -18,6 +18,9 @@
     "url": "https://github.com/ihordiachenko/eslint-plugin-chai-friendly/issues"
   },
   "author": "Ihor Diachenko",
+  "contributors": [
+    "Brett Zamir"
+  ],
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha tests --recursive"
@@ -27,8 +30,8 @@
     "eslint": ">=3.0.0"
   },
   "devDependencies": {
-    "eslint": "~3.11.0",
-    "mocha": "^3.0.2"
+    "eslint": "~6.6.0",
+    "mocha": "^6.2.2"
   },
   "engines": {
     "node": ">=0.10.0"
