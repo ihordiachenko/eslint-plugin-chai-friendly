@@ -20,6 +20,10 @@ var ruleTester = new RuleTester();
 
 ruleTester.run("no-unused-expressions", rule, {
     valid: [
+        {
+            code: "import('./some-file.js');",
+            parser: require.resolve("babel-eslint")
+        },
         "function f(){}",
         "a = b",
         "new a",
