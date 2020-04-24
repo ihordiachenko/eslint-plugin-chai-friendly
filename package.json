@@ -33,7 +33,7 @@
   "devDependencies": {
     "babel-eslint": "^10.1.0",
     "eslint": "~6.6.0",
-    "mocha": "^6.2.2",
+    "mocha": "^7.1.1",
     "nyc": "^15.0.1"
   },
   "engines": {
