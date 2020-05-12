@@ -32,8 +32,8 @@
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",
-    "eslint": "~6.6.0",
-    "mocha": "^7.1.1",
+    "eslint": "7.0.0",
+    "mocha": "^7.1.2",
     "nyc": "^15.0.1"
   },
   "engines": {
