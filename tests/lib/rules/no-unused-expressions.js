@@ -20,10 +20,6 @@ var ruleTester = new RuleTester();
 
 ruleTester.run("no-unused-expressions", rule, {
     valid: [
-        {
-            code: "import('./some-file.js');",
-            parser: require.resolve("babel-eslint")
-        },
         "function f(){}",
         "a = b",
         "new a",
@@ -75,6 +71,19 @@ ruleTester.run("no-unused-expressions", rule, {
             options: [{ allowTaggedTemplates: true }],
             parserOptions: { ecmaVersion: 6 }
         },
+        {
+            code: "import(\"foo\")",
+            parserOptions: { ecmaVersion: 11 }
+        },
+        {
+            code: "func?.(\"foo\")",
+            parserOptions: { ecmaVersion: 11 }
+        },
+        {
+            code: "obj?.foo(\"bar\")",
+            parserOptions: { ecmaVersion: 11 }
+        },
+
         // Chai statements
         "expect(foo).to.be.true;",
         "expect(foo).to.have.a.property('bar').which.is.true",
@@ -134,6 +143,24 @@ ruleTester.run("no-unused-expressions", rule, {
             parserOptions: { ecmaVersion: 6 },
             errors: ["Expected an assignment or function call and instead saw an expression."]
         },
+
+        // Optional chaining
+        {
+            code: "obj?.foo",
+            parserOptions: { ecmaVersion: 2020 },
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+        {
+            code: "obj?.foo.bar",
+            parserOptions: { ecmaVersion: 2020 },
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+        {
+            code: "obj?.foo().bar",
+            parserOptions: { ecmaVersion: 2020 },
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+
         // Chai statements
         { code: "foo.expect('bar').not.to.pass;", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }]},
         { code: "should.not.pass;", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }] },
