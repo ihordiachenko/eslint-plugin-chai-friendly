@@ -83,6 +83,29 @@ ruleTester.run("no-unused-expressions", rule, {
             code: "obj?.foo(\"bar\")",
             parserOptions: { ecmaVersion: 11 }
         },
+        // JSX
+        {
+            code: "<div />",
+            parserOptions: { ecmaFeatures: { jsx: true } }
+        },
+        {
+            code: "<></>",
+            parserOptions: { ecmaFeatures: { jsx: true } }
+        },
+        {
+            code: "var partial = <div />",
+            parserOptions: { ecmaFeatures: { jsx: true } }
+        },
+        {
+            code: "var partial = <div />",
+            options: [{ enforceForJSX: true }],
+            parserOptions: { ecmaFeatures: { jsx: true } }
+        },
+        {
+            code: "var partial = <></>",
+            options: [{ enforceForJSX: true }],
+            parserOptions: { ecmaFeatures: { jsx: true } }
+        },
 
         // Chai statements
         "expect(foo).to.be.true;",
@@ -98,11 +121,11 @@ ruleTester.run("no-unused-expressions", rule, {
         { code: "{0}", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
         { code: "[]", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
         { code: "a && b();", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
-        { code: "a() || false", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }]},
-        { code: "a || (b = c)", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }]},
-        { code: "a ? b() || (c = d) : e", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }]},
-        { code: "a && b()", options: [{ allowTernary: true }], errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }]},
-        { code: "a ? b() : c()", options: [{ allowShortCircuit: true }], errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }]},
+        { code: "a() || false", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]},
+        { code: "a || (b = c)", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]},
+        { code: "a ? b() || (c = d) : e", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]},
+        { code: "a && b()", options: [{ allowTernary: true }], errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]},
+        { code: "a ? b() : c()", options: [{ allowShortCircuit: true }], errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]},
         { code: "a || b", options: [{ allowShortCircuit: true }], errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
         { code: "a() && b", options: [{ allowShortCircuit: true }], errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
         { code: "a ? b : 0", options: [{ allowTernary: true }], errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
@@ -160,9 +183,22 @@ ruleTester.run("no-unused-expressions", rule, {
             parserOptions: { ecmaVersion: 2020 },
             errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
         },
+        // JSX
+        {
+            code: "<div />",
+            options: [{ enforceForJSX: true }],
+            parserOptions: { ecmaFeatures: { jsx: true } },
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+        {
+            code: "<></>",
+            options: [{ enforceForJSX: true }],
+            parserOptions: { ecmaFeatures: { jsx: true } },
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
 
         // Chai statements
-        { code: "foo.expect('bar').not.to.pass;", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }]},
-        { code: "should.not.pass;", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement" }] },
+        { code: "foo.expect('bar').not.to.pass;", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]},
+        { code: "should.not.pass;", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }] },
     ]
 });
