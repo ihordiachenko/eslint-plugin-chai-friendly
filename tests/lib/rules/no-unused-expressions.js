@@ -112,7 +112,19 @@ ruleTester.run("no-unused-expressions", rule, {
         "expect(foo).to.have.a.property('bar').which.is.true",
         "foo.should.be.true;",
         "foo.inner.nested.should.be.true",
-        "foo.should.have.a.property('bar').which.is.true;"
+        "foo.should.have.a.property('bar').which.is.true;",
+        {
+            code: "foo?.should.be.true;",
+            parserOptions: { ecmaVersion: 11 }
+        },
+        {
+            code: "foo?.bar?.should.be.true;",
+            parserOptions: { ecmaVersion: 11 }
+        },
+        {
+            code: "expect(foo?.bar).should.be.true;",
+            parserOptions: { ecmaVersion: 11 }
+        }
     ],
     invalid: [
         { code: "0", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
@@ -142,29 +154,29 @@ ruleTester.run("no-unused-expressions", rule, {
             code: "`untagged template literal`",
             options: [{ allowTaggedTemplates: true }],
             parserOptions: { ecmaVersion: 6},
-            errors: ["Expected an assignment or function call and instead saw an expression."]
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
         },
         {
             code: "`untagged template literal`",
             options: [{ allowTaggedTemplates: false }],
             parserOptions: { ecmaVersion: 6},
-            errors: ["Expected an assignment or function call and instead saw an expression."]
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
         },
         {
             code: "tag`tagged template literal`",
             options: [{ allowTaggedTemplates: false }],
             parserOptions: { ecmaVersion: 6},
-            errors: ["Expected an assignment or function call and instead saw an expression."]
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
         },
         {
             code: "`untagged template literal`",
             parserOptions: { ecmaVersion: 6 },
-            errors: ["Expected an assignment or function call and instead saw an expression."]
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
         },
         {
             code: "tag`tagged template literal`",
             parserOptions: { ecmaVersion: 6 },
-            errors: ["Expected an assignment or function call and instead saw an expression."]
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
         },
 
         // Optional chaining
@@ -200,5 +212,15 @@ ruleTester.run("no-unused-expressions", rule, {
         // Chai statements
         { code: "foo.expect('bar').not.to.pass;", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]},
         { code: "should.not.pass;", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }] },
+        {
+            code: "foo?.expect.to.be.true;",
+            parserOptions: { ecmaVersion: 11 },
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+        {
+            code: "foo?.bar?.expect.to.be.true;",
+            parserOptions: { ecmaVersion: 11 },
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        }
     ]
 });
