@@ -22,6 +22,9 @@
     "Brett Zamir"
   ],
   "main": "lib/index.js",
+  "files": [
+    "lib/**/*.js"
+  ],
   "scripts": {
     "lint": "eslint .",
     "test": "nyc mocha tests --recursive"
