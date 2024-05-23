@@ -40,7 +40,7 @@ ESLint 9 flat config format:
 import pluginChaiFriendly from 'eslint-plugin-chai-friendly';
 
 export default {
-    plugins: [pluginChaiFriendly],
+    plugins: {'chai-friendly': pluginChaiFriendly},
     rules: {
         "no-unused-expressions": "off", // disable original rule
         "chai-friendly/no-unused-expressions": "error"
