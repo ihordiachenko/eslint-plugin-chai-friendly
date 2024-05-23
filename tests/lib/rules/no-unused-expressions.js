@@ -123,7 +123,10 @@ ruleTester.run("no-unused-expressions", rule, {
         {
             code: "expect(foo?.bar).should.be.true;",
             parserOptions: { ecmaVersion: 11 }
-        }
+        },
+
+        // ESLint 9 flat config compatibility check
+        { code: "var foo = () => {\"use strict\"; return true; }", languageOptions: { ecmaVersion: 6 } },
     ],
     invalid: [
         { code: "0", errors: [{ message: "Expected an assignment or function call and instead saw an expression.", type: "ExpressionStatement"}]},
