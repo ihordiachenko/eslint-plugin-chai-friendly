@@ -32,31 +32,52 @@ npm install eslint-plugin-chai-friendly --save-dev
 
 ## Usage
 
-Add `chai-friendly` to the plugins section of your `.eslintrc.*` configuration file. You can omit the `eslint-plugin-` prefix:
+Add `chai-friendly` to the plugins section of your  ESLint configuration file. Then disable original `no-unused-expressions` rule and configure chai-friendly replacement under the rules section.
+
+ESLint 9 flat config format:
+
+```js
+import pluginChaiFriendly from 'eslint-plugin-chai-friendly';
+
+export default {
+    plugins: {'chai-friendly': pluginChaiFriendly},
+    rules: {
+        "no-unused-expressions": "off", // disable original rule
+        "chai-friendly/no-unused-expressions": "error"
+    },
+};
+```
+
+Legacy `.eslintrc` format:
 
 ```json
 {
     "plugins": [
-        "chai-friendly"
-    ]
-}
-```
-
-
-Then disable original `no-unused-expressions` rule and configure chai-friendly replacement under the rules section.
-
-```json
-{
+        "chai-friendly" // you can omit the eslint-plugin- prefix
+    ],
     "rules": {
-        "no-unused-expressions": 0,
+        "no-unused-expressions": 0, // disable original rule
         "chai-friendly/no-unused-expressions": 2
     }
 }
 ```
 
 If you don't need to tweak the above rule settings, you can instead
-just add the following to your config file's `extends` and the above
-will be applied automatically:
+extend the provided recommended configuration.
+
+ESLint 9 flat config format:
+
+```js
+const pluginChaiFriendly = require("eslint-plugin-chai-friendly");
+
+module.exports = [
+    pluginChaiFriendly.configs.recommended,
+    // other configurations
+]
+```
+
+Legacy `.eslintrc` format:
+
 
 ```json
 {

@@ -27,7 +27,8 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "test": "nyc mocha tests --recursive"
+    "test": "nyc mocha tests --recursive",
+    "integration-test": "npx eslint examples/test.js --no-ignore"
   },
   "peerDependencies": {
     "eslint": ">=3.0.0"
@@ -35,7 +36,8 @@
   "devDependencies": {
     "@babel/core": "^7.23.7",
     "@babel/eslint-parser": "^7.23.3",
-    "eslint": "^8.56.0",
+    "chai": "^5.1.1",
+    "eslint": "^9.3.0",
     "mocha": "^10.0.0",
     "nyc": "^15.1.0"
   },
