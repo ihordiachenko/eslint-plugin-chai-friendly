@@ -7,7 +7,7 @@ module.exports = {
             configFile: false,
         },
     },
-    extends: ['eslint:recommended', './lib/index.js'],
+    extends: ['eslint:recommended'],
     env: {
         node: true
     },
