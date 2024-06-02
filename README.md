@@ -81,7 +81,7 @@ Legacy `.eslintrc` format:
 
 ```json
 {
-  "extends": ["plugin:chai-friendly/recommended"]
+  "extends": ["plugin:chai-friendly/recommended:legacy"]
 }
 ```
 
