@@ -28,7 +28,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "nyc mocha tests --recursive",
-    "integration-test": "npx examples/test.js --no-ignore"
+    "integration-test": "npx eslint examples/test.js --no-ignore"
   },
   "peerDependencies": {
     "eslint": ">=3.0.0"

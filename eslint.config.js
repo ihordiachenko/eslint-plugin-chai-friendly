@@ -3,7 +3,7 @@
 const pluginChaiFriendly = require("./lib");
 
 module.exports = [
-    pluginChaiFriendly.configs.recommended,
+    pluginChaiFriendly.configs.recommendedV9,
     {
         ignores: ["node_modules", "!.eslintrc.js", "examples"],
     }
