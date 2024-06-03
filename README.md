@@ -71,7 +71,7 @@ ESLint 9 flat config format:
 const pluginChaiFriendly = require("eslint-plugin-chai-friendly");
 
 module.exports = [
-    pluginChaiFriendly.configs.recommendedV9,
+    pluginChaiFriendly.configs.recommendedFlat,
     // other configurations
 ]
 ```
