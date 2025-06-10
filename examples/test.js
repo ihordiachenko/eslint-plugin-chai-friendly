@@ -7,3 +7,4 @@ foo.should.be.true;
 // this should cause unused expression error
 const foo = {bar: 'baz'};
 foo.bar;
+(testInstance.prop === 'test');
