@@ -27,7 +27,7 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "test": "nyc mocha tests --recursive && npm run integration-test && npm run integration-test:ts",
+    "test": "nyc mocha tests --recursive && npm run integration-test:all",
     "integration-test": "npx eslint examples/test.js --no-ignore",
     "integration-test:ts": "npx eslint --config examples/eslint.config.js examples/test-ts-specific.ts --no-ignore",
     "integration-test:all": "npx eslint --config examples/eslint.config.js examples/test.js examples/test-ts-specific.ts --no-ignore"
