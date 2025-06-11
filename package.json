@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-chai-friendly",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "This plugin makes 'no-unused-expressions' rule friendly towards chai expect statements.",
   "keywords": [
     "eslint",
