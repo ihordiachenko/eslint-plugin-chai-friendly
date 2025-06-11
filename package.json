@@ -27,8 +27,10 @@
   ],
   "scripts": {
     "lint": "eslint .",
-    "test": "nyc mocha tests --recursive",
-    "integration-test": "npx eslint examples/test.js --no-ignore"
+    "test": "nyc mocha tests --recursive && npm run integration-test && npm run integration-test:ts",
+    "integration-test": "npx eslint examples/test.js --no-ignore",
+    "integration-test:ts": "npx eslint --config examples/eslint.config.js examples/test-ts-specific.ts --no-ignore",
+    "integration-test:all": "npx eslint --config examples/eslint.config.js examples/test.js examples/test-ts-specific.ts --no-ignore"
   },
   "peerDependencies": {
     "eslint": ">=3.0.0"
@@ -36,10 +38,13 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@babel/eslint-parser": "^7.25.1",
+    "@typescript-eslint/eslint-plugin": "^8.34.0",
+    "@typescript-eslint/parser": "^8.34.0",
     "chai": "^5.1.1",
     "eslint": "^9.3.0",
     "mocha": "^10.0.0",
-    "nyc": "^15.1.0"
+    "nyc": "^15.1.0",
+    "typescript": "^5.8.3"
   },
   "engines": {
     "node": ">=0.10.0"

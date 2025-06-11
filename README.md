@@ -101,3 +101,39 @@ More info in the original rule's [docs](http://eslint.org/docs/rules/no-unused-e
 ## Supported Rules
 
 - `chai-friendly/no-unused-expressions`
+
+## TypeScript Compatibility
+
+If you're using TypeScript with `@typescript-eslint`, you need to disable both the original ESLint rule and the TypeScript ESLint version:
+
+ESLint 9 flat config format:
+
+```js
+import pluginChaiFriendly from 'eslint-plugin-chai-friendly';
+
+export default {
+    plugins: {'chai-friendly': pluginChaiFriendly},
+    rules: {
+        "no-unused-expressions": "off", // disable original rule
+        "@typescript-eslint/no-unused-expressions": "off", // disable TypeScript ESLint version
+        "chai-friendly/no-unused-expressions": "error"
+    },
+};
+```
+
+Legacy `.eslintrc` format:
+
+```json
+{
+    "plugins": [
+        "chai-friendly"
+    ],
+    "rules": {
+        "no-unused-expressions": 0, // disable original rule
+        "@typescript-eslint/no-unused-expressions": 0, // disable TypeScript ESLint version
+        "chai-friendly/no-unused-expressions": 2
+    }
+}
+```
+
+Note that if you use the recommended configuration, both rules will be disabled automatically.
