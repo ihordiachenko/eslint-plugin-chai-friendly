@@ -1,0 +1,37 @@
+name: CI
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["*"]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: npm ci
+      - name: Run unit tests
+        run: npm run test:unit
+      - name: Run JS integration tests and capture output
+        run: npm run integration-test > js-integration.log || true
+      - name: Run TS integration tests and capture output
+        run: npm run integration-test:ts > ts-integration.log || true
+      - name: Check JS integration test output for expected errors
+        run: |
+          grep -F 'examples/test.js' js-integration.log
+          grep -F '   9:1  error  Expected an assignment or function call and instead saw an expression  chai-friendly/no-unused-expressions' js-integration.log
+          grep -F '  10:1  error  Expected an assignment or function call and instead saw an expression  chai-friendly/no-unused-expressions' js-integration.log
+      - name: Check TS integration test output for expected errors
+        run: |
+          grep -F 'examples/test-ts-specific.ts' ts-integration.log
+          grep -F '  35:1  error  Expected an assignment or function call and instead saw an expression  chai-friendly/no-unused-expressions' ts-integration.log
+          grep -F '  36:1  error  Expected an assignment or function call and instead saw an expression  chai-friendly/no-unused-expressions' ts-integration.log
+
