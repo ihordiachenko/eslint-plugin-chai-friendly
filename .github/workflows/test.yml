@@ -18,6 +18,8 @@ jobs:
           node-version: 20
       - name: Install dependencies
         run: npm ci
+      - name: Run unit tests
+        run: npm run test:unit
       - name: Run JS integration tests and capture output
         run: npm run integration-test > js-integration.log || true
       - name: Run TS integration tests and capture output
@@ -32,5 +34,4 @@ jobs:
           grep -F 'examples/test-ts-specific.ts' ts-integration.log
           grep -F '  35:1  error  Expected an assignment or function call and instead saw an expression  chai-friendly/no-unused-expressions' ts-integration.log
           grep -F '  36:1  error  Expected an assignment or function call and instead saw an expression  chai-friendly/no-unused-expressions' ts-integration.log
-      - name: Run all tests
-        run: npm test
+
