@@ -28,6 +28,7 @@
   "scripts": {
     "lint": "eslint .",
     "test": "npm run test:unit && npm run integration-test:all",
+    "test:types": "npx tsc -p tests/types/tsconfig.json",
     "test:unit": "nyc mocha tests/ --recursive",
     "integration-test": "npx eslint examples/test.js --no-ignore",
     "integration-test:ts": "npx eslint --config examples/eslint.config.js examples/test-ts-specific.ts --no-ignore",
