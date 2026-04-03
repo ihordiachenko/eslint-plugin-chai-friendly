@@ -248,3 +248,64 @@ ruleTester.run("no-unused-expressions", rule, {
         }
     ]
 });
+
+//------------------------------------------------------------------------------
+// TypeScript-specific tests (require @typescript-eslint/parser)
+//------------------------------------------------------------------------------
+
+const tsParser = require("@typescript-eslint/parser");
+
+const tsTester = new RuleTester({
+    languageOptions: { parser: tsParser }
+});
+
+tsTester.run("no-unused-expressions (TypeScript)", rule, {
+    valid: [
+        // TSAsExpression around JSXElement — JSX not disallowed by default
+        {
+            code: "<div/> as any",
+            languageOptions: {
+                parser: tsParser,
+                parserOptions: { ecmaFeatures: { jsx: true } }
+            }
+        },
+        // TSNonNullExpression around a call — allowShortCircuit lets right-side call through
+        {
+            code: "foo && foo()!;",
+            options: [{ allowShortCircuit: true }]
+        },
+        // TSInstantiationExpression wrapping a call inside short-circuit
+        {
+            code: "(Foo && Foo())<string, number>;",
+            options: [{ allowShortCircuit: true }]
+        }
+    ],
+    invalid: [
+        {
+            code: "foo as any;",
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+        {
+            code: "<any>foo;",
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+        {
+            code: "foo!;",
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+        {
+            code: "Foo<string>;",
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+        {
+            code: "Map<string, string>;",
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        },
+        // TSNonNullExpression around a MemberExpression — still disallowed even with allowShortCircuit
+        {
+            code: "foo && foo?.bar;",
+            options: [{ allowShortCircuit: true }],
+            errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
+        }
+    ]
+});
