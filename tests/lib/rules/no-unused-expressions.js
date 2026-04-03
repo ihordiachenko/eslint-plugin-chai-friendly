@@ -107,11 +107,13 @@ ruleTester.run("no-unused-expressions", rule, {
             languageOptions: { parserOptions: { ecmaFeatures: { jsx: true } } }
         },
 
-        // ignoreDirectives option — schema-compatible; heuristic already handles these
+        // ignoreDirectives option
         { code: "\"use strict\";", options: [{ ignoreDirectives: true }] },
         { code: "\"directive one\"; \"directive two\"; f();", options: [{ ignoreDirectives: true }] },
         { code: "function foo() {\"use strict\"; return true; }", options: [{ ignoreDirectives: true }] },
         { code: "function foo() {\"directive one\"; \"directive two\"; f(); }", options: [{ ignoreDirectives: true }] },
+        // ignoreDirectives: true restores heuristic for ecmaVersion: 3 where parser doesn't set node.directive
+        { code: "\"use strict\";", options: [{ ignoreDirectives: true }], languageOptions: { ecmaVersion: 3, sourceType: "script" } },
 
         // Chai statements
         "expect(foo).to.be.true;",
@@ -241,6 +243,8 @@ ruleTester.run("no-unused-expressions", rule, {
 
         // ignoreDirectives does not exempt non-directive expressions
         { code: "foo;", options: [{ ignoreDirectives: true }], errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }] },
+        // parser does not set node.directive for ecmaVersion: 3
+        { code: "\"use strict\";", languageOptions: { ecmaVersion: 3, sourceType: "script" }, errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }] },
 
         // Chai statements
         { code: "foo.expect('bar').not.to.pass;", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]},
