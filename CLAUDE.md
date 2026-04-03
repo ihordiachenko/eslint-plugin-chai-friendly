@@ -43,3 +43,5 @@ Both configs disable the original `no-unused-expressions` and `@typescript-eslin
 **`tests/lib/rules/no-unused-expressions.js`** — Mocha tests using ESLint's `RuleTester`.
 
 **`examples/`** — Integration test fixtures. `eslint.config.js` configures the plugin; `test.js` and `test-ts-specific.ts` are linted as part of `npm test`.
+
+**Important:** `npm run integration-test:all` intentionally exits with errors. Each example file contains a clearly commented section of lines that are *supposed* to be flagged by the rule (e.g. `foo.bar;`, bare comparisons). These serve as living documentation of invalid usage. A non-zero exit from the integration test command is expected and normal — do not treat it as a regression. Use `npm run test:unit` to verify rule correctness.
