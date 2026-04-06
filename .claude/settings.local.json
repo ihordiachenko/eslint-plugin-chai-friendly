@@ -5,7 +5,8 @@
       "WebFetch(domain:raw.githubusercontent.com)",
       "Bash(curl:*)",
       "Bash(gh api:*)",
-      "Bash(npm run:*)"
+      "Bash(npm run:*)",
+      "Bash(npm audit:*)"
     ]
   }
 }
