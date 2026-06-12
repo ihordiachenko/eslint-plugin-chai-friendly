@@ -264,7 +264,9 @@ ruleTester.run("no-unused-expressions", rule, {
             code: "foo?.bar?.expect.to.be.true;",
             languageOptions: { ecmaVersion: 11 },
             errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]
-        }
+        },
+        { code: "a && expect(foo).to.be.true;",  errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }]},
+        { code: "a ? foo.should.be.true : foo.should.be.false;", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }] },
     ]
 });
 
