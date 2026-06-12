@@ -133,6 +133,12 @@ ruleTester.run("no-unused-expressions", rule, {
             code: "expect(foo?.bar).should.be.true;",
             languageOptions: { ecmaVersion: 11 }
         },
+        { code: "a && expect(foo).to.be.true;", options: [{ allowShortCircuit: true }] },
+        { code: "a && foo.should.be.true;", options: [{ allowShortCircuit: true }] },
+        { code: "a ? expect(foo).to.be.true : expect(foo).to.be.false", options: [{ allowTernary: true }] },
+        { code: "a ? foo.should.be.true : foo.should.be.false", options: [{ allowTernary: true }] },
+        { code: "a ? expect(foo).to.be.true || (c = d) : expect(foo).to.be.false", options: [{ allowShortCircuit: true, allowTernary: true }] },
+        { code: "a ? foo.should.be.true || (c = d) : foo.should.be.false", options: [{ allowShortCircuit: true, allowTernary: true }] },
     ],
     invalid: [
         { code: "0", errors: [{ messageId: "unusedExpression", type: "ExpressionStatement" }] },
