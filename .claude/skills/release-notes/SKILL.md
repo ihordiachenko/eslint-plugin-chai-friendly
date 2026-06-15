@@ -51,17 +51,17 @@ Fetch `https://github.com/ihordiachenko/eslint-plugin-chai-friendly/releases` an
 
 ### Step 5 — Draft release notes
 
-Output in this format:
+Output as raw markdown (do not wrap the result in a code block). Use this format:
 
-```
-**{version}**
+Changes:
 
 - {change 1}
 - {change 2}
 - {change 3}
-```
 
 Rules:
+- Do not include a version header.
+- Use the plain text `Changes:` as the list title (not a markdown heading).
 - Lead each bullet with a verb: "Added", "Fixed", "Improved", "Removed"
 - Mention option names in backticks (e.g. `ignoreDirectives`)
 - Mention node type names in backticks (e.g. `TSAsExpression`)
